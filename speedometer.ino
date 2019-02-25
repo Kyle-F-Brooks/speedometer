@@ -24,7 +24,7 @@ void setup() {
   // some variables can be used for both objects as they do not vary between the two
   onesDisp.begin(displayConfig, numDig, digitPins, onesPins, resistorsOnSeg);
   tensDisp.begin(displayConfig, numDig, digitPins, tensPins, resistorsOnSeg);
-  // creates a serial connection between the board and the computer
+  // creates a serial connection between the board and the computer(only valid when the board is connected to a PC)
   Serial.begin(9600);
   // creates a serial connection based on the software serial object
   // starts the connection between the board and the GPS module
@@ -36,18 +36,26 @@ void loop() {
   while(connection.available()){
     gps.encode(connection.read()); // the data recieved over the serial connection is handled by the TinyGPS library
   }
+  // loop checks if speed is updated, if true then it changes the values on the display
+  // if the speed doesn't change, there is no need to set the displays differently
   if(gps.speed.isUpdated()){
     int travelRate = gps.speed.mph();
-    Serial.println(travelRate);
-    setDisp(round(travelRate));
+    Serial.println(travelRate); // prints the value to connected laptop, allows for debugging
+    setDisp(travelRate); // passes the speed to the function setDisp
   }
 }
 
 void setDisp(int travelRate) {
+  // using % 10 returns remainder of travelRate/10
   int ones = travelRate % 10;
   int tens = (travelRate/10) % 10;
+  // sets the new values on the displays
   onesDisp.setNumber(ones);
   tensDisp.setNumber(tens);
   onesDisp.refreshDisplay();
   tensDisp.refreshDisplay();
 }
+/*  When it comes to speeds above 100, there may be a bug or the dispalys will just count from 00
+ *  onwards, this will need to be checked by giving a false value when the hardware is put together.
+ *  this version is not currently tested. so whilst the code may compile, it may not work.
+*/
