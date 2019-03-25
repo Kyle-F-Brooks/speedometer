@@ -3,7 +3,7 @@
 #include <SoftwareSerial.h>
 #include <TinyGPS++.h>
 // set recieve and transmit pins for GPS module
-SoftwareSerial connection(2,3); //recieve-2 & transmit-3
+SoftwareSerial connection(10,11); //recieve-10 & transmit-11
 // creates GPS object to handle the data from the gps module
 TinyGPSPlus gps;
 // creates two seperate 7-segment objects, one object handling the tens and the other handling the ones
@@ -18,7 +18,7 @@ void setup() {
   byte digitPins[] = {}; // set to an empty array as the object only controls a single digit
   // pin number format {A, B, C, D, E, F, G, DP} each letter relates to the segment on the display
   byte onesPins[] = {19,18,17,16,15,14,13,12}; // pin numbers for ones display
-  byte tensPins[] = {11,10,9,8,7,6,5,4}; // pin numbers for tens display
+  byte tensPins[] = {3,2,9,8,7,6,5,4}; // pin numbers for tens display
   bool resistorsOnSeg = true; // tells the sevseg object each segment has an independent resistor
   // use of the previously defined variables to give information regarding each sevseg object
   // some variables can be used for both objects as they do not vary between the two
@@ -34,16 +34,16 @@ void setup() {
 }
 
 void loop() {
-  // 
   while(connection.available()){
     gps.encode(connection.read()); // the data recieved over the serial connection is handled by the TinyGPS library
-  }
-  // loop checks if speed is updated, if true then it changes the values on the display
-  // if the speed doesn't change, there is no need to set the displays differently
-  if(gps.speed.isUpdated()){
     int travelRate = gps.speed.mph();
-    Serial.println(travelRate); // prints the value to connected laptop, allows for debugging
-    setDisp(travelRate); // passes the speed to the function setDisp
+    // loop checks if speed is updated, if true then it changes the values on the display
+    // if the speed doesn't change, there is no need to set the displays differently
+    if(gps.location.isUpdated()){
+      int travelRate = gps.speed.mph();
+      Serial.println(travelRate); // prints the value to connected laptop, allows for debugging
+      setDisp(travelRate); // passes the speed to the function setDisp
+    }
   }
 }
 
