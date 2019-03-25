@@ -37,9 +37,10 @@ void loop() {
   while(connection.available()){
     gps.encode(connection.read()); // the data recieved over the serial connection is handled by the TinyGPS library
     int travelRate = gps.speed.mph();
-    Serial.println(travelRate); 
-    setDisp(travelRate);
-    delay(500);
+//    Serial.println(travelRate); 
+//    setDisp(travelRate);
+//    delay(500);
+    break; // allows check each time data is sent, it was getting stuck in this loop
   }
   // loop checks if speed is updated, if true then it changes the values on the display
   // if the speed doesn't change, there is no need to set the displays differently
