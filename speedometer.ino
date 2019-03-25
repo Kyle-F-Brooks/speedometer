@@ -23,6 +23,8 @@ void setup() {
   // use of the previously defined variables to give information regarding each sevseg object
   // some variables can be used for both objects as they do not vary between the two
   onesDisp.begin(displayConfig, numDig, digitPins, onesPins, resistorsOnSeg);
+  onesDisp.setBrightness(90);
+  tensDisp.setBrightness(90);
   tensDisp.begin(displayConfig, numDig, digitPins, tensPins, resistorsOnSeg);
   // creates a serial connection between the board and the computer(only valid when the board is connected to a PC)
   Serial.begin(9600);
