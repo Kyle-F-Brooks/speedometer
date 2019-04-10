@@ -17,8 +17,8 @@ void setup() {
   byte numDig = 1; // tells the sevseg object how many digits it will be handling
   byte digitPins[] = {}; // set to an empty array as the object only controls a single digit
   // pin number format {A, B, C, D, E, F, G, DP} each letter relates to the segment on the display
-  byte onesPins[] = {19,18,17,16,15,14,12,13}; // pin numbers for ones display
-  byte tensPins[] = {3,2,9,8,7,6,5,4}; // pin numbers for tens display
+  byte onesPins[] = {3,2,9,8,7,6,5,4}; // pin numbers for ones display
+  byte tensPins[] = {19,18,17,16,15,14,12,13}; // pin numbers for tens display
   bool resistorsOnSeg = true; // tells the sevseg object each segment has an independent resistor
   // use of the previously defined variables to give information regarding each sevseg object
   // some variables can be used for both objects as they do not vary between the two
@@ -42,7 +42,6 @@ void loop() {
   if(gps.location.isUpdated()){
     int travelRate = gps.speed.mph(); // prints the value to connected laptop, allows for debugging
     setDisp(travelRate); // passes the speed to the function setDisp
-    delay(10); // stops flickering displays
   }
 }
 
