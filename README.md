@@ -18,6 +18,8 @@ Load onto arduino through usb
 ## Libraries
 *SevSeg*, *SoftwareSerial*, *TinyGPS++*
 
+## Thanks
+Many thanks to Evan Harry, if it weren't for his excellent README format I wouldn't be the man I am today.
 
 ## Notes
 
