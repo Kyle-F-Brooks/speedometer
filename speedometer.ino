@@ -34,7 +34,6 @@ void setup() {
 void loop() {
   while(connection.available()){
     gps.encode(connection.read()); // the data recieved over the serial connection is handled by the TinyGPS library
-    int travelRate = gps.speed.mph();
     break; // allows check each time data is sent, it was getting stuck in this loop
   }
   // loop checks if location is updated, if true then it changes the values on the display
