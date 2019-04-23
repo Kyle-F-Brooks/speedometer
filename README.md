@@ -18,7 +18,6 @@ Load onto arduino through usb
 ## Libraries
 *SevSeg*, *SoftwareSerial*, *TinyGPS++*
 
-
 ## Notes
 
 Uses GPS and 7-segment displays
