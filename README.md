@@ -7,14 +7,13 @@
 **Description** - Software/Hardware project   
 
 ## Installation
-Load onto arduino through usb
+Install the .ino onto the Arduino using a compatible IDE
 
 ## Usage
-```bash
-
-```
-
-
+With the displays and GPS wired into the Arduino (details of pins in code comments) 
+power the device and once it finds a satellite, it will begin to display the speed.  
+It is important to note a GPS signal is easier to find outside.  
+  
 ## Libraries
 *SevSeg*, *SoftwareSerial*, *TinyGPS++*
 
