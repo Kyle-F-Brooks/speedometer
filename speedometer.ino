@@ -10,6 +10,7 @@ TinyGPSPlus gps;
 // two are created as the SevSeg library is written to handle single or quad digit displays
 SevSeg onesDisp;
 SevSeg tensDisp;
+bool sigFound = false;
 
 void setup() {  
   // sets up both displays
@@ -32,8 +33,14 @@ void setup() {
 }
 
 void loop() {
+  if(sigFound == false){
+    setDisp(88);
+  }
   while(connection.available()){
     gps.encode(connection.read()); // the data recieved over the serial connection is handled by the TinyGPS library
+    if(sigFound == false){
+      sigFound = true;
+    }
     break; // allows check each time data is sent, it was getting stuck in this loop
   }
   // loop checks if location is updated, if true then it changes the values on the display
